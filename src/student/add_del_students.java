@@ -2,14 +2,18 @@
 package student;
 
 import java.awt.HeadlessException;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,12 +23,14 @@ public class add_del_students extends javax.swing.JFrame {
     Connection newcon = null;
     PreparedStatement pst = null;
     PreparedStatement pst1 = null;
+    PreparedStatement pst2 = null;
     ResultSet rs = null;
-    
+    ResultSet rs1 = null;
     public add_del_students() {
         initComponents();
     }
 
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -58,6 +64,16 @@ public class add_del_students extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Remove_table = new javax.swing.JTable();
+        delete_button = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        Enter_id_field = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Search_table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -231,7 +247,7 @@ public class add_del_students extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jLabel3)
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Schedule", jPanel3);
@@ -252,10 +268,106 @@ public class add_del_students extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel4)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(393, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Test", jPanel4);
+
+        Remove_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "DOB", "Batch", "Start Date", "Contact", "Exam level"
+            }
+        ));
+        jScrollPane2.setViewportView(Remove_table);
+
+        delete_button.setText("Search");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(252, 252, 252)
+                .addComponent(delete_button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                .addComponent(delete_button)
+                .addGap(46, 46, 46))
+        );
+
+        jTabbedPane1.addTab("Remve student", jPanel1);
+
+        jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Enter ID");
+
+        Search_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "DOB", "Batch", "Start Date", "Contact", "Exam level"
+            }
+        ));
+        jScrollPane3.setViewportView(Search_table);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(Enter_id_field, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(89, 89, 89))))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(Enter_id_field))
+                .addContainerGap(359, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(139, 139, 139)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(247, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane1.addTab("Search", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -311,6 +423,67 @@ public class add_del_students extends javax.swing.JFrame {
         
     }//GEN-LAST:event_AddStudentButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+        String sql = "select Name, Date_of_birth, Batch, Start_date, Contact, Exam_level from student_details where student_id = ?";
+        
+        newcon = DriverManager.getConnection("jdbc:mysql://localhost/music","root","");
+        
+        pst2=newcon.prepareStatement(sql); 
+        pst2.setString(1,Enter_id_field.getText());
+        
+        String[] student_search_array = new String[6];
+        rs1 = pst2.executeQuery();
+        ArrayList<String> student_search = new ArrayList<String>();
+        if (rs1.next())
+        {
+            
+            
+              student_search_array[0] =   rs1.getString("Name");
+              student_search_array[1] =   rs1.getString("Date_of_birth");
+              student_search_array[2] =   rs1.getString("Batch");
+              student_search_array[3] =   rs1.getString("Start_date");
+              student_search_array[4] =   rs1.getString("Contact");
+              student_search_array[5] =   rs1.getString("Exam_level");
+              
+              
+            
+            System.out.println("hello");
+            System.out.println(rs1.getString("Name"));
+            System.out.println(rs1.getString("Date_of_birth"));
+            System.out.println(rs1.getString("Batch"));
+            System.out.println(rs1.getString("Start_date"));
+            System.out.println(rs1.getString("Contact"));
+            System.out.println(rs1.getString("Exam_level"));
+            
+            
+        }
+        
+       
+        //student_search.add(rs.getString("Name"));
+            
+       
+            DefaultTableModel model = (DefaultTableModel) Search_table.getModel();
+            Object[] row =  new  Object[6];
+            row[0] = student_search_array[0];
+            row[1] = student_search_array[1];
+            row[2] = student_search_array[2];
+            row[3] = student_search_array[3];
+            row[4] = student_search_array[4];
+            row[5] = student_search_array[5];
+           model.addRow(row);
+            
+        
+        } catch (Exception e) {
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -352,16 +525,22 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JTextField Batch_text;
     private javax.swing.JTextField Contact_text;
     private datechooser.beans.DateChooserCombo DOBChooser;
+    private javax.swing.JTextField Enter_id_field;
     private javax.swing.JComboBox<String> Exam_level_drop_down;
     private javax.swing.JTextField Mother_tongue_text;
     private javax.swing.JTextField Name_text;
     private javax.swing.JTextField Parent_contact_text;
     private javax.swing.JTextField Parent_name_text;
+    private javax.swing.JTable Remove_table;
+    private javax.swing.JTable Search_table;
     private datechooser.beans.DateChooserCombo StartChooser;
+    private javax.swing.JButton delete_button;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -370,10 +549,14 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

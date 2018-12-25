@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -25,6 +27,9 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
+        JFrame frame = new JFrame();
+        JButton btn = new JButton("Submit_button");
+        frame.getRootPane().setDefaultButton(btn);
     }
 
    
@@ -36,7 +41,7 @@ public class Login extends javax.swing.JFrame {
         user = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Submit_button = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
 
@@ -52,10 +57,15 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Submit_button.setText("Submit");
+        Submit_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Submit_buttonActionPerformed(evt);
+            }
+        });
+        Submit_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Submit_buttonKeyPressed(evt);
             }
         });
 
@@ -73,7 +83,7 @@ public class Login extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(159, 159, 159)
-                .addComponent(jButton1)
+                .addComponent(Submit_button)
                 .addContainerGap(196, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -105,7 +115,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
-                .addComponent(jButton1)
+                .addComponent(Submit_button)
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
@@ -123,7 +133,7 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Submit_buttonActionPerformed
         // TODO add your handling code here:
         String sql = "Select * from users where username = ? and password = ?";
         try {
@@ -138,7 +148,8 @@ public class Login extends javax.swing.JFrame {
             if(rs.next())
             {
                 JOptionPane.showMessageDialog(null,"username and password matched! Welcome");
- 
+                add_del_students adddel = new  add_del_students();
+                adddel.setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(null, "username and password do not match");
@@ -150,7 +161,7 @@ JOptionPane.showMessageDialog(null,ex);
 }
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Submit_buttonActionPerformed
 
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
         // TODO add your handling code here:
@@ -159,6 +170,10 @@ JOptionPane.showMessageDialog(null,ex);
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordFieldActionPerformed
+
+    private void Submit_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Submit_buttonKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Submit_buttonKeyPressed
 
    
     public static void main(String args[]) {
@@ -192,10 +207,10 @@ JOptionPane.showMessageDialog(null,ex);
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField PasswordField;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Submit_button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

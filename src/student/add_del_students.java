@@ -33,6 +33,7 @@ public class add_del_students extends javax.swing.JFrame {
     ResultSet rs1 = null;
     ResultSet rs2 = null;
     ResultSet rs3= null;
+    
     public add_del_students() {
         initComponents();
     }
@@ -45,6 +46,7 @@ public class add_del_students extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         Batch_tab = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         AddStudentButton = new javax.swing.JButton();
@@ -88,7 +90,6 @@ public class add_del_students extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        SelectedDay = new javax.swing.JComboBox<>();
         java.util.Date date = new java.util.Date();
         SpinnerDateModel sm = new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
         BatchStartTimeDay1 = new javax.swing.JSpinner(sm);
@@ -109,10 +110,11 @@ public class add_del_students extends javax.swing.JFrame {
         End_2_time = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        student_id_text = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         Teacher_name = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
+        day1_radio = new javax.swing.JRadioButton();
+        day2_radio = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -291,7 +293,7 @@ public class add_del_students extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel4)
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addContainerGap(419, Short.MAX_VALUE))
         );
 
         Batch_tab.addTab("Add Student to Batch", jPanel4);
@@ -326,7 +328,7 @@ public class add_del_students extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                 .addComponent(delete_button)
                 .addGap(46, 46, 46))
         );
@@ -392,12 +394,12 @@ public class add_del_students extends javax.swing.JFrame {
                     .addComponent(Enter_id_field))
                 .addGap(28, 28, 28)
                 .addComponent(jLabel14)
-                .addContainerGap(338, Short.MAX_VALUE))
+                .addContainerGap(357, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(139, 139, 139)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(247, Short.MAX_VALUE)))
+                    .addContainerGap(275, Short.MAX_VALUE)))
         );
 
         Batch_tab.addTab("Search", jPanel5);
@@ -416,8 +418,6 @@ public class add_del_students extends javax.swing.JFrame {
         jLabel17.setText("Day 1");
 
         jLabel18.setText("Day2");
-
-        SelectedDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sunday", "Tuesday", "Thursday", "Saturday"}));
 
         JSpinner.DateEditor de = new JSpinner.DateEditor(BatchStartTimeDay1, "HH:mm");
         BatchStartTimeDay1.setEditor(de);
@@ -451,7 +451,17 @@ public class add_del_students extends javax.swing.JFrame {
 
         jLabel22.setText("Teacher");
 
-        jLabel23.setText("Day");
+        Teacher_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Teacher_nameActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(day1_radio);
+        day1_radio.setText("Day 1");
+
+        buttonGroup1.add(day2_radio);
+        day2_radio.setText("Day 2");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -463,14 +473,13 @@ public class add_del_students extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel21)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(93, 93, 93)
-                                .addComponent(jButton3)))
+                                .addComponent(student_id_text, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(89, 89, 89)
+                        .addComponent(jButton3)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel22)
@@ -502,12 +511,13 @@ public class add_del_students extends javax.swing.JFrame {
                                             .addComponent(jLabel19))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jLabel23)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(SelectedDay, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(End_2_time, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Start_2_time, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(Start_2_time, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(day1_radio)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(day2_radio)))
+                                .addGap(14, 14, 14))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(52, 52, 52)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,7 +548,7 @@ public class add_del_students extends javax.swing.JFrame {
                         .addComponent(jLabel22)
                         .addComponent(Teacher_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BatchStartTimeDay2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -562,13 +572,13 @@ public class add_del_students extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(End_2_time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel20))))
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23)
-                    .addComponent(SelectedDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(student_id_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(day1_radio)
+                    .addComponent(day2_radio))
+                .addGap(79, 79, 79)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
@@ -708,52 +718,82 @@ public class add_del_students extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int teacherId = 0;
         try {
-            String selectedDay = batch_day.getSelectedItem().toString();
-            java.util.Date selectedTimeDay1 = (java.util.Date) BatchStartTimeDay1.getValue();
-            java.util.Date selectedTimeDay2 = (java.util.Date) BatchStartTimeDay2.getValue();
-            Object TimeDay1 = new java.sql.Time(selectedTimeDay1.getTime());
-            Object TimeDay2 = new java.sql.Time(selectedTimeDay2.getTime());
-            System.out.println(selectedDay);
-            System.out.println(TimeDay1);
-            System.out.println(TimeDay2);
             
-            String sql = "INSERT INTO teacher_type_table"
-        +"(teacher_name, teacher_instrument, Day_1, Day_2, Day_1_start,Day_1_end, Day_2_start,Day_2_end)"
-        +"VALUES (?,?,?,?,?,?,?,?)";
-        newcon = DriverManager.getConnection("jdbc:mysql://localhost/music","root","");
-        pst = newcon.prepareStatement(sql);
-       
-        pst.setString(1,Name_text.getText());
-        pst.setString(2,DOBChooser.getText());
-        pst.setString(3,Batch_text.getText());
-        pst.setString(4,StartChooser.getText());
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-      //  String date1 = sdf.format(DOBChooser.getText());
-        
-        
-        pst.setString(5,Contact_text.getText());
-        pst.setString(6,Parent_name_text.getText());
-        pst.setString(7,Parent_contact_text.getText());
-      //  String date2 = sdf.format(StartChooser.getSelectedDate());
-        
-        pst.setString(8,Mother_tongue_text.getText());
-        
-        pst.setString(9,Address_text.getText());
-        pst.setInt(10,(Exam_level_drop_down.getSelectedIndex()+1));
-       
-        pst.executeUpdate();
-        JOptionPane.showMessageDialog(null, "inserted successfully");
-
+            String query = "select * from batch1 where batch_student_id = ?";
+            newcon = DriverManager.getConnection("jdbc:mysql://localhost/music","root","");
+            PreparedStatement st = newcon.prepareStatement(query);
+            st.setString(1,student_id_text.getText());
+            ResultSet rs = st.executeQuery();
+            
+            
+            System.out.println("after teacher");
+            if(rs.next())
+            {
+                System.out.println(" here");
+                System.out.println("Already exists");
+            }
+            
+            else if(day1_radio.isSelected())
+            {
+                
+                
+             System.out.println("hello else if");
+             
+             String query1 = "select teacher_id from teacher_type_table where teacher_name = ?";
+            
+            
+            PreparedStatement st5 = newcon.prepareStatement(query1);
+            
+            st5.setString(1, Teacher_name.getText());
+            ResultSet rs5 = st5.executeQuery();
+            rs5.next();
+            teacherId = rs5.getInt("teacher_id");
+            System.out.println(teacherId);
+            
+            
+            String query2 = "insert into batch1 (batch_student_id, batch_teacher_id,batch_no) values (?,?,1)";
+            newcon = DriverManager.getConnection("jdbc:mysql://localhost/music","root","");
+            PreparedStatement st2 = newcon.prepareStatement(query2);
+            st2.setInt(1,Integer.parseInt(student_id_text.getText()));
+            st2.setInt(2, teacherId);
+               
+            int rs2 = st2.executeUpdate();
+                
+                 System.out.println("inserted");
+                 JOptionPane.showMessageDialog(null, "inserted successfully");
+            }
+            else 
+            {
+                System.out.println("hello else");
+            
+                System.out.println("Here in insert");
+                String query1 = "select teacher_id from teacher_type_table where teacher_name = ?";
+            
+            
+            PreparedStatement st5 = newcon.prepareStatement(query1);
+            
+            st5.setString(1, Teacher_name.getText());
+            ResultSet rs5 = st5.executeQuery();
+            rs5.next();
+            rs5.next();
+            teacherId = rs5.getInt("teacher_id");
+            System.out.println(teacherId);
+            String query2 = "insert into batch1 (batch_student_id, batch_teacher_id,batch_no) values (?,?,2)";
+            newcon = DriverManager.getConnection("jdbc:mysql://localhost/music","root","");
+            PreparedStatement st2 = newcon.prepareStatement(query2);
+            st2.setInt(1,Integer.parseInt(student_id_text.getText()));
+            st2.setInt(2, teacherId);
+            int rs2 = st2.executeUpdate();
+                 System.out.println("inserted day 2");
+                 JOptionPane.showMessageDialog(null, "inserted successfully");
+            }
+           
+        } catch (Exception e) {
         }
         
         
-        
-            
-            
-         catch (Exception e) {
-                System.out.println(e);
-        }
         
         
         
@@ -761,6 +801,33 @@ public class add_del_students extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private int getTeacherID()
+    {
+        try {
+            
+            
+            
+            
+            String query1 = "select teacher_id from teacher_type_table where teacher_name = ?";
+            
+            newcon = DriverManager.getConnection("jdbc:mysql://localhost/music","root","");
+            PreparedStatement st2 = newcon.prepareStatement(query1);
+            System.out.println(Teacher_name.getText().length());
+            st2.setString(1, Teacher_name.getText());
+            ResultSet rs2 = st2.executeQuery();
+            while(rs2.next())
+            {
+                
+                int teacherId = rs1.getInt("teacher_id");
+            }
+            
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
@@ -822,6 +889,10 @@ public class add_del_students extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void Teacher_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Teacher_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Teacher_nameActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -878,12 +949,14 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JTextField Parent_name_text;
     private javax.swing.JTable Remove_table;
     private javax.swing.JTable Search_table;
-    private javax.swing.JComboBox<String> SelectedDay;
     private datechooser.beans.DateChooserCombo StartChooser;
     private javax.swing.JTextField Start_1_time;
     private javax.swing.JTextField Start_2_time;
     private javax.swing.JTextField Teacher_name;
     private javax.swing.JComboBox<String> batch_day;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton day1_radio;
+    private javax.swing.JRadioButton day2_radio;
     private javax.swing.JButton delete_button;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -904,7 +977,6 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -920,6 +992,6 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField student_id_text;
     // End of variables declaration//GEN-END:variables
 }

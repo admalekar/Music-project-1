@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -46,7 +47,7 @@ public class add_del_students extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        Batch_tab = new javax.swing.JTabbedPane();
+        Fees_tab = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         AddStudentButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -71,8 +72,6 @@ public class add_del_students extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         Batch_text = new javax.swing.JTextField();
         UpdateStudent_button = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         Enter_id_field = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -120,6 +119,15 @@ public class add_del_students extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         Attendance_table = new javax.swing.JTable();
         Submit_Attendance_button = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        Student_id = new javax.swing.JTextField();
+        Fees_paid = new javax.swing.JTextField();
+        Months_dropdown = new javax.swing.JComboBox<>();
+        jLabel26 = new javax.swing.JLabel();
+        Pay_fees_buton = new javax.swing.JButton();
+        Pay_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -291,28 +299,7 @@ public class add_del_students extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        Batch_tab.addTab("Add Student", jPanel2);
-
-        jLabel4.setText("Type:");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel4)
-                .addContainerGap(600, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel4)
-                .addContainerGap(419, Short.MAX_VALUE))
-        );
-
-        Batch_tab.addTab("Add Student to Batch", jPanel4);
+        Fees_tab.addTab("Add Student", jPanel2);
 
         Enter_id_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,7 +368,7 @@ public class add_del_students extends javax.swing.JFrame {
                     .addContainerGap(275, Short.MAX_VALUE)))
         );
 
-        Batch_tab.addTab("Search", jPanel5);
+        Fees_tab.addTab("Search", jPanel5);
 
         jLabel3.setText("Type:");
 
@@ -569,7 +556,7 @@ public class add_del_students extends javax.swing.JFrame {
                 .addGap(37, 37, 37))
         );
 
-        Batch_tab.addTab("Batch Details", jPanel3);
+        Fees_tab.addTab("Batch Details", jPanel3);
 
         jLabel23.setText("Proffesor");
 
@@ -663,17 +650,96 @@ public class add_del_students extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        Batch_tab.addTab("Attendance", jPanel6);
+        Fees_tab.addTab("Attendance", jPanel6);
+
+        jLabel4.setText("Student ID");
+
+        jLabel25.setText("Fees Paid");
+
+        Months_dropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"1", "2", "3"}));
+        Months_dropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Months_dropdownActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setText("Months");
+
+        Pay_fees_buton.setText("Show Receipt");
+        Pay_fees_buton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Pay_fees_butonActionPerformed(evt);
+            }
+        });
+
+        Pay_button.setText("Pay fees");
+        Pay_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Pay_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel26))
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Fees_paid, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Months_dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(40, 40, 40)
+                        .addComponent(Student_id, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(Pay_button)
+                        .addGap(35, 35, 35)))
+                .addContainerGap(375, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Pay_fees_buton)
+                .addGap(185, 185, 185))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(Student_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(Fees_paid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(Months_dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(70, 70, 70)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Pay_fees_buton)
+                    .addComponent(Pay_button))
+                .addContainerGap(163, Short.MAX_VALUE))
+        );
+
+        Fees_tab.addTab("Fees", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Batch_tab)
+            .addComponent(Fees_tab)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Batch_tab)
+            .addComponent(Fees_tab)
         );
 
         pack();
@@ -745,6 +811,8 @@ public class add_del_students extends javax.swing.JFrame {
                 System.out.println(rs1.getString("Contact"));
                 System.out.println(rs1.getString("Exam_level"));
 
+            } else {
+                JOptionPane.showMessageDialog(null, "Student ID not found");
             }
 
             //student_search.add(rs.getString("Name"));
@@ -838,10 +906,11 @@ public class add_del_students extends javax.swing.JFrame {
                 st2.setInt(2, teacherId);
                 int rs2 = st2.executeUpdate();
                 System.out.println("inserted day 2");
-                JOptionPane.showMessageDialog(null, "inserted successfully");
+                JOptionPane.showMessageDialog(null, "inserted Student into batch successfully");
             }
 
         } catch (Exception e) {
+            System.out.println(e);
         }
 
 
@@ -1035,15 +1104,93 @@ public class add_del_students extends javax.swing.JFrame {
 
                 pst3 = newcon.prepareStatement(sql);
                 pst3.execute();
-                JOptionPane.showMessageDialog(null,"Attendance taken");
+                JOptionPane.showMessageDialog(null, "Attendance taken");
             } catch (Exception e) {
                 System.out.println(e);
-                JOptionPane.showMessageDialog(null,"Attendance NOT taken");
+                JOptionPane.showMessageDialog(null, "Attendance NOT taken");
             }
         }
 
 
     }//GEN-LAST:event_Submit_Attendance_buttonActionPerformed
+
+    private void Months_dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Months_dropdownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Months_dropdownActionPerformed
+
+    private void Pay_fees_butonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pay_fees_butonActionPerformed
+        // TODO add your handling code here:
+        String name = null;
+        try {
+            String sql = "select Name from student_details where student_id = ?";
+
+            newcon = DriverManager.getConnection("jdbc:mysql://localhost/music", "root", "");
+
+            pst2 = newcon.prepareStatement(sql);
+            pst2.setString(1, Student_id.getText());
+
+            ResultSet rs1 = pst2.executeQuery();
+            rs1.next();
+            name = rs1.getString("Name");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        GregorianCalendar gg = new GregorianCalendar();
+        SimpleDateFormat dd = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat ddd = new SimpleDateFormat("hh:mm");
+
+        String Header
+                = "******* Music project **********;"
+                + "Date:" + dd.format(gg.getTime()) + "       Time:" + ddd.format(gg.getTime()) + "\n;"
+                + "           Fees Receipt          \n;"
+                + "---------------------------------\n;"
+                + "Name          Months       Amount\n;"
+                + "---------------------------------\n;";
+
+        String a = name + "          " + Months_dropdown.getSelectedItem().toString() + "          " + Fees_paid.getText() + "\n;";
+        String h = Header + a;
+        String amt
+                = "\n;---------------------------------\n;"
+                + "Total Amount:            Rs." + Fees_paid.getText() + "\n;"
+                + "---------------------------------\n;"
+                + "---------------------------------\n;"
+                + "            Thank You             \n;"
+                + "           Music School            \n;"
+                + "_________________________________\n;";
+
+        String bill = h + amt;
+
+        printNow p = new printNow();
+        p.printCard(bill);
+
+
+    }//GEN-LAST:event_Pay_fees_butonActionPerformed
+
+    private void Pay_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pay_buttonActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            
+            Integer num = Integer.parseInt(Months_dropdown.getSelectedItem().toString());
+            int days = num * 30;
+            
+            String sql = "insert into fees(Student_id, amount_paid, End_date) values(" + Student_id.getText() + "," + Fees_paid.getText() + ",curdate() + interval " + days + " day )";
+
+            newcon = DriverManager.getConnection("jdbc:mysql://localhost/music", "root", "");
+
+            pst3 = newcon.prepareStatement(sql);
+            pst3.execute();
+            JOptionPane.showMessageDialog(null, "Fees inserted successfully");
+
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Not inserted successfully");
+        }
+
+
+    }//GEN-LAST:event_Pay_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1086,7 +1233,6 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JTable Attendance_table;
     private javax.swing.JSpinner BatchStartTimeDay1;
     private javax.swing.JSpinner BatchStartTimeDay2;
-    private javax.swing.JTabbedPane Batch_tab;
     private javax.swing.JTextField Batch_text;
     private javax.swing.JTextField Contact_text;
     private datechooser.beans.DateChooserCombo DOBChooser;
@@ -1097,15 +1243,21 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JTextField End_2_time;
     private javax.swing.JTextField Enter_id_field;
     private javax.swing.JComboBox<String> Exam_level_drop_down;
+    private javax.swing.JTextField Fees_paid;
+    private javax.swing.JTabbedPane Fees_tab;
+    private javax.swing.JComboBox<String> Months_dropdown;
     private javax.swing.JTextField Mother_tongue_text;
     private javax.swing.JTextField Name_text;
     private javax.swing.JTextField Parent_contact_text;
     private javax.swing.JTextField Parent_name_text;
+    private javax.swing.JButton Pay_button;
+    private javax.swing.JButton Pay_fees_buton;
     private javax.swing.JTable Search_table;
     private javax.swing.JButton ShowStudent_text;
     private datechooser.beans.DateChooserCombo StartChooser;
     private javax.swing.JTextField Start_1_time;
     private javax.swing.JTextField Start_2_time;
+    private javax.swing.JTextField Student_id;
     private javax.swing.JButton Submit_Attendance_button;
     private javax.swing.JTextField Teacher_name;
     private javax.swing.JButton UpdateStudent_button;
@@ -1134,6 +1286,8 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1141,9 +1295,9 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;

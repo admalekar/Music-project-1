@@ -73,10 +73,6 @@ public class add_del_students extends javax.swing.JFrame {
         UpdateStudent_button = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Remove_table = new javax.swing.JTable();
-        delete_button = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         Enter_id_field = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -317,43 +313,6 @@ public class add_del_students extends javax.swing.JFrame {
         );
 
         Batch_tab.addTab("Add Student to Batch", jPanel4);
-
-        Remove_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Name", "DOB", "Batch", "Start Date", "Contact", "Exam level"
-            }
-        ));
-        jScrollPane2.setViewportView(Remove_table);
-
-        delete_button.setText("Search");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(252, 252, 252)
-                .addComponent(delete_button)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
-                .addComponent(delete_button)
-                .addGap(46, 46, 46))
-        );
-
-        Batch_tab.addTab("Remve student", jPanel1);
 
         Enter_id_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -986,6 +945,24 @@ public class add_del_students extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    public int Student_id(String name) {
+        try {
+            String sql = "Select student_id from student_details where Name = '" + name + "'";
+            newcon = DriverManager.getConnection("jdbc:mysql://localhost/music", "root", "");
+            Statement s = newcon.createStatement();
+            System.out.println(sql);
+
+            ResultSet rs7 = s.executeQuery(sql);
+            rs7.next();
+            int Id = rs7.getInt("student_id");
+            return Id;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+
     private void ShowStudent_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowStudent_textActionPerformed
         int Id = 0;
         try {
@@ -1001,23 +978,23 @@ public class add_del_students extends javax.swing.JFrame {
             Id = rs5.getInt("teacher_id");
 
             String sql = "Select Name from student_details a ,batch1 b where a.student_id = b.batch_student_id and b.batch_no = " + Day_text.getText() + " and b.batch_teacher_id = " + Id + "";
-            
+
             Statement s = newcon.createStatement();
             System.out.println(sql);
-            
+
             ResultSet rs7 = s.executeQuery(sql);
-            
+
             if (!rs7.next()) {
-                Id = Id +4;
+                Id = Id + 4;
                 sql = "Select Name from student_details a ,batch1 b where a.student_id = b.batch_student_id and b.batch_no = " + Day_text.getText() + " and b.batch_teacher_id = " + Id + "";
-            
+
                 s = newcon.createStatement();
                 System.out.println(sql);
-            
+
                 rs7 = s.executeQuery(sql);
+            } else {
+                rs7.beforeFirst();
             }
-            else{
-                rs7.beforeFirst();}
             String[] studentListArray = new String[10];
             ArrayList<String> studentList = new ArrayList<String>();
             System.out.println("hello");
@@ -1025,7 +1002,7 @@ public class add_del_students extends javax.swing.JFrame {
             while (rs7.next()) {
                 System.out.println(rs7);
                 studentListArray[0] = rs7.getString("Name");
-                
+
                 Object[] row = new Object[2];
                 System.out.println("hey");
                 row[0] = studentListArray[0];
@@ -1044,10 +1021,28 @@ public class add_del_students extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) Attendance_table.getModel();
         int rowcount = model.getRowCount();
         System.out.println(rowcount);
-        Object a = model.getValueAt(rowcount-1,1);
-        System.out.println(a);
-        
-        
+
+        for (int i = 0; i < rowcount; i++) {
+            try {
+                Object present = model.getValueAt(i, 1);
+                String name = (model.getValueAt(i, 0)).toString();
+                System.out.println(name);
+                int id = Student_id(name);
+                System.out.println(present);
+                String sql = "insert into attendance(Student_id, lesson_date, present) values(" + id + ",curdate()," + 1 + ")";
+
+                newcon = DriverManager.getConnection("jdbc:mysql://localhost/music", "root", "");
+
+                pst3 = newcon.prepareStatement(sql);
+                pst3.execute();
+                JOptionPane.showMessageDialog(null,"Attendance taken");
+            } catch (Exception e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null,"Attendance NOT taken");
+            }
+        }
+
+
     }//GEN-LAST:event_Submit_Attendance_buttonActionPerformed
 
     /**
@@ -1106,7 +1101,6 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JTextField Name_text;
     private javax.swing.JTextField Parent_contact_text;
     private javax.swing.JTextField Parent_name_text;
-    private javax.swing.JTable Remove_table;
     private javax.swing.JTable Search_table;
     private javax.swing.JButton ShowStudent_text;
     private datechooser.beans.DateChooserCombo StartChooser;
@@ -1119,7 +1113,6 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton day1_radio;
     private javax.swing.JRadioButton day2_radio;
-    private javax.swing.JButton delete_button;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1148,14 +1141,12 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField prof_name;

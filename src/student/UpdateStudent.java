@@ -105,37 +105,28 @@ public class UpdateStudent extends javax.swing.JFrame {
     private void UpdateStudent_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateStudent_buttonActionPerformed
         // TODO add your handling code here:
         try {
-           String table = "student_details";
-           
-        double num = Long.parseLong(ParentContact_text.getText().trim());
-            
-        String updateStu = "update " + table +" set Parent_contact = "+num +" where student_id = "+StudentID_text.getText()+"";
-        
-        Connection newcon = DriverManager.getConnection("jdbc:mysql://localhost/music","root","");
-        Statement s = newcon.createStatement();
-        
-        if (ParentContact_text.getText().length() == 10)
-        {
-            s.execute(updateStu);
-            JOptionPane.showMessageDialog(null,"Updated! ");
-        }
-        else
-            JOptionPane.showMessageDialog(null,"Enter correct number! ");
-        } 
-        catch(NumberFormatException n)
-        {
-            JOptionPane.showMessageDialog(null,"Number incorrect"+n);
-        }
-        
-        catch (Exception e) {
+            String table = "student_details";
+
+            Long num = Long.parseLong(ParentContact_text.getText().trim());
+
+            String updateStu = "update " + table + " set Parent_contact = " + num + " where student_id = " + StudentID_text.getText() + "";
+            System.out.println(num);
+            Connection newcon = DriverManager.getConnection("jdbc:mysql://localhost/music", "root", "");
+            Statement s = newcon.createStatement();
+
+            if (ParentContact_text.getText().length() == 10) {
+                s.execute(updateStu);
+                JOptionPane.showMessageDialog(null, "Updated! ");
+            } else {
+                JOptionPane.showMessageDialog(null, "Enter correct number! ");
+            }
+        } catch (NumberFormatException n) {
+            JOptionPane.showMessageDialog(null, "Number incorrect" + n);
+        } catch (Exception e) {
             System.out.println(e);
         }
-        
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_UpdateStudent_buttonActionPerformed
 
     /**

@@ -47,7 +47,7 @@ public class add_del_students extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        Fees_tab = new javax.swing.JTabbedPane();
+        Exams = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         AddStudentButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -119,6 +119,12 @@ public class add_del_students extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         Pay_fees_buton = new javax.swing.JButton();
         Pay_button = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        Student_id_text = new javax.swing.JTextField();
+        Schedule_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -284,7 +290,7 @@ public class add_del_students extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        Fees_tab.addTab("Add Student", jPanel2);
+        Exams.addTab("Add Student", jPanel2);
 
         Enter_id_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -353,7 +359,7 @@ public class add_del_students extends javax.swing.JFrame {
                     .addContainerGap(275, Short.MAX_VALUE)))
         );
 
-        Fees_tab.addTab("Search", jPanel5);
+        Exams.addTab("Search", jPanel5);
 
         jLabel3.setText("Type:");
 
@@ -529,7 +535,7 @@ public class add_del_students extends javax.swing.JFrame {
                 .addGap(37, 37, 37))
         );
 
-        Fees_tab.addTab("Batch Details", jPanel3);
+        Exams.addTab("Batch Details", jPanel3);
 
         jLabel23.setText("Proffesor");
 
@@ -628,7 +634,7 @@ public class add_del_students extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        Fees_tab.addTab("Attendance", jPanel6);
+        Exams.addTab("Attendance", jPanel6);
 
         jLabel4.setText("Student ID");
 
@@ -707,17 +713,64 @@ public class add_del_students extends javax.swing.JFrame {
                 .addContainerGap(163, Short.MAX_VALUE))
         );
 
-        Fees_tab.addTab("Fees", jPanel1);
+        Exams.addTab("Fees", jPanel1);
+
+        jLabel12.setText("Student ID");
+
+        jLabel27.setText("Date of Exam");
+
+        Schedule_button.setText("Schedule");
+        Schedule_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Schedule_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Schedule_button)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel12))
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Student_id_text, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(322, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(Student_id_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
+                .addGap(126, 126, 126)
+                .addComponent(Schedule_button)
+                .addContainerGap(152, Short.MAX_VALUE))
+        );
+
+        Exams.addTab("Exam", jPanel7);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fees_tab)
+            .addComponent(Exams)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fees_tab)
+            .addComponent(Exams)
         );
 
         pack();
@@ -727,16 +780,14 @@ public class add_del_students extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (Contact_text.getText().length() != 10 || Parent_contact_text.getText().length() != 10
                 || !Contact_text.getText().matches("[0-9]+") || !Parent_contact_text.getText().matches("[0-9]+")) {
-            
-            
-            
+
             System.out.println(Contact_text.getText().matches("[0-9]+"));
             System.out.println(Parent_contact_text.getText().matches("[0-9]+"));
             JOptionPane.showMessageDialog(null, "Verify Contacts");
         } else {
 
             try {
-                
+
                 Long parent_num = Long.parseLong(Parent_contact_text.getText().trim());
                 Long student_num = Long.parseLong(Contact_text.getText().trim());
                 String sql = "INSERT INTO student_details"
@@ -772,6 +823,27 @@ public class add_del_students extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_AddStudentButtonActionPerformed
+
+    public Boolean doesStudentExist(int student_id) {
+        try {
+            String sql = "select student_id from student_details where student_id = ?";
+
+            newcon = DriverManager.getConnection("jdbc:mysql://localhost/music", "root", "");
+
+            pst2 = newcon.prepareStatement(sql);
+            pst2.setInt(1, student_id);
+            rs1 = pst2.executeQuery();
+            if (rs1.next()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -1188,6 +1260,59 @@ public class add_del_students extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Contact_textActionPerformed
 
+    private void Schedule_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Schedule_buttonActionPerformed
+        // TODO add your handling code here:
+
+        int studentid = Integer.parseInt(Student_id_text.getText());
+        if (doesStudentExist(studentid)) {
+            try {
+                String sql = "select Grade, max(Exam_level) as Exam_level from exam_table where Grade = (select max(Grade) from exam_table where Student_id = ?) and Student_id = ?";
+
+                newcon = DriverManager.getConnection("jdbc:mysql://localhost/music", "root", "");
+
+                pst2 = newcon.prepareStatement(sql);
+                pst2.setString(1, Student_id_text.getText());
+                pst2.setString(2, Student_id_text.getText());
+                rs1 = pst2.executeQuery();
+
+                rs1.next();
+
+                int Exam = Integer.parseInt(rs1.getString("Exam_level"));
+                System.out.println(Exam);
+                int grade = rs1.getInt("Grade");
+                System.out.println(grade);
+                if (Exam == 4) {
+                    grade++;
+                    Exam = 1;
+                } else {
+                    Exam++;
+
+                }
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String Exam_date = sdf.format(dateChooserCombo1.getSelectedDate().getTime());
+                System.out.println(Exam_date);
+                java.util.Date exam_date = sdf.parse(Exam_date);
+                java.sql.Date examdate = new java.sql.Date(exam_date.getTime());
+
+                String insert_sql = "insert into exam_table(Student_id, Grade, Exam_level, Date) values(" + Student_id_text.getText() + "," + grade + "," + Exam + ",?)";
+
+                pst3 = newcon.prepareStatement(insert_sql);
+                pst3.setDate(1, examdate);
+                pst3.execute();
+                JOptionPane.showMessageDialog(null, "A new exam is scheduled for " + Exam_date + "");
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Student Does not exist");
+        }
+
+    }//GEN-LAST:event_Schedule_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1235,8 +1360,8 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JTextField End_1_time;
     private javax.swing.JTextField End_2_time;
     private javax.swing.JTextField Enter_id_field;
+    private javax.swing.JTabbedPane Exams;
     private javax.swing.JTextField Fees_paid;
-    private javax.swing.JTabbedPane Fees_tab;
     private javax.swing.JComboBox<String> Grade_level_drop_down;
     private javax.swing.JComboBox<String> Months_dropdown;
     private javax.swing.JTextField Mother_tongue_text;
@@ -1245,17 +1370,20 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JTextField Parent_name_text;
     private javax.swing.JButton Pay_button;
     private javax.swing.JButton Pay_fees_buton;
+    private javax.swing.JButton Schedule_button;
     private javax.swing.JTable Search_table;
     private javax.swing.JButton ShowStudent_text;
     private datechooser.beans.DateChooserCombo StartChooser;
     private javax.swing.JTextField Start_1_time;
     private javax.swing.JTextField Start_2_time;
     private javax.swing.JTextField Student_id;
+    private javax.swing.JTextField Student_id_text;
     private javax.swing.JButton Submit_Attendance_button;
     private javax.swing.JTextField Teacher_name;
     private javax.swing.JButton UpdateStudent_button;
     private javax.swing.JComboBox<String> batch_day;
     private javax.swing.ButtonGroup buttonGroup1;
+    private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private javax.swing.JRadioButton day1_radio;
     private javax.swing.JRadioButton day2_radio;
     private javax.swing.JButton jButton1;
@@ -1265,6 +1393,7 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1280,6 +1409,7 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1292,6 +1422,7 @@ public class add_del_students extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

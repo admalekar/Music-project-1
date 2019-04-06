@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2019 at 06:36 PM
+-- Generation Time: Mar 25, 2019 at 08:07 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `music`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `attendance_ID` int(3) NOT NULL,
+  `Student_ID` int(1) NOT NULL,
+  `lesson_date` date NOT NULL,
+  `present` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`attendance_ID`, `Student_ID`, `lesson_date`, `present`) VALUES
+(2, 1, '2019-03-22', 1),
+(4, 3, '2019-03-22', 1),
+(5, 3, '2019-03-22', 1),
+(6, 4, '2019-03-22', 1);
 
 -- --------------------------------------------------------
 
@@ -52,8 +75,51 @@ CREATE TABLE `batch1` (
 --
 
 INSERT INTO `batch1` (`batch_id`, `batch_student_id`, `batch_teacher_id`, `batch_no`) VALUES
-(1, 1, 1, 0),
-(5, 2, 6, 2);
+(1, 1, 1, 1),
+(5, 2, 6, 2),
+(6, 3, 4, 1),
+(7, 4, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exam_table`
+--
+
+CREATE TABLE `exam_table` (
+  `Student_id` int(4) NOT NULL,
+  `Grade` int(1) NOT NULL,
+  `Exam` int(1) NOT NULL,
+  `Score` int(2) DEFAULT NULL,
+  `Date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `exam_table`
+--
+
+INSERT INTO `exam_table` (`Student_id`, `Grade`, `Exam`, `Score`, `Date`) VALUES
+(8, 1, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fees`
+--
+
+CREATE TABLE `fees` (
+  `fee_id` int(11) NOT NULL,
+  `Student_id` int(11) NOT NULL,
+  `Amount_paid` int(11) NOT NULL,
+  `End_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fees`
+--
+
+INSERT INTO `fees` (`fee_id`, `Student_id`, `Amount_paid`, `End_date`) VALUES
+(1, 4, 3433, '2019-04-22');
 
 -- --------------------------------------------------------
 
@@ -65,11 +131,10 @@ CREATE TABLE `student_details` (
   `student_id` int(4) NOT NULL,
   `Name` varchar(20) NOT NULL,
   `Date_of_birth` varchar(10) NOT NULL,
-  `Batch` int(2) NOT NULL,
   `Start_date` varchar(10) NOT NULL,
-  `Contact` int(10) NOT NULL,
+  `Contact` bigint(10) NOT NULL,
   `Parent_name` varchar(20) NOT NULL,
-  `Parent_contact` int(10) NOT NULL,
+  `Parent_contact` bigint(10) NOT NULL,
   `Mother_tongue` varchar(10) NOT NULL,
   `Address` varchar(50) NOT NULL,
   `Exam_level` int(1) NOT NULL
@@ -79,9 +144,14 @@ CREATE TABLE `student_details` (
 -- Dumping data for table `student_details`
 --
 
-INSERT INTO `student_details` (`student_id`, `Name`, `Date_of_birth`, `Batch`, `Start_date`, `Contact`, `Parent_name`, `Parent_contact`, `Mother_tongue`, `Address`, `Exam_level`) VALUES
-(1, 'Amey', '17/12/18', 1, '17/12/18', 875454545, 'sdfsf', 787878777, 'Marath', 'adfafd', 0),
-(2, 'Tanvi', '27/12/18', 1, '27/12/18', 215454545, 'Dinesh', 987878777, 'Marathi', 'adfafd', 2);
+INSERT INTO `student_details` (`student_id`, `Name`, `Date_of_birth`, `Start_date`, `Contact`, `Parent_name`, `Parent_contact`, `Mother_tongue`, `Address`, `Exam_level`) VALUES
+(1, 'Amey', '17/12/18', '17/12/18', 875454545, 'sdfsf', 1879879871, 'Marath', 'adfafd', 0),
+(2, 'Tanvi', '27/12/18', '27/12/18', 215454545, 'Dinesh', 879879879, 'Marathi', 'adfafd', 2),
+(3, 'Apurva', '27/12/18', '27/12/18', 615456545, 'Dinesh', 879879879, 'Marathi', 'My address', 2),
+(4, 'Dhawal', '27/12/18', '27/12/18', 915456545, 'Mahindra', 9875461235, 'Marathi', 'His address', 2),
+(5, 'Siddhesh', '17/11/18', '27/02/18', 815476545, 'Mahindra', 9875461235, 'Hindi', 'His address also', 2),
+(7, 'Hitesh', '3/25/19', '3/25/19', 7823212325, 'God', 9856452135, 'Hind', 'His addres also', 3),
+(8, 'Hitu', '3/25/19', '3/25/19', 8965548798, 'Find', 1232655487, 'gert', 'Also address', 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +177,7 @@ INSERT INTO `teacher_type_table` (`teacher_id`, `teacher_name`, `teacher_instrum
 (2, 'Mr. Black', 'Piano', 'Saturday', '16:00:00', '17:00:00'),
 (3, 'Mr. Red', 'Drums', 'Tuesday', '09:00:00', '10:00:00'),
 (4, 'Mr. Blue', 'Violin', 'Sunday', '10:00:00', '11:00:00'),
-(5, 'Mr. White', 'Guitar', 'Sunday', '00:00:00', '00:00:00'),
+(5, 'Mr. White', 'Guitar', 'Sunday', '00:00:00', '01:00:00'),
 (6, 'Mr. Black', 'Piano', 'Tuesday', '10:00:00', '11:00:00'),
 (7, 'Mr. Red', 'Drums', 'Saturday', '11:00:00', '12:00:00'),
 (8, 'Mr. Blue', 'Violin', 'Thursday', '10:00:00', '11:00:00');
@@ -138,6 +208,12 @@ INSERT INTO `users` (`userid`, `username`, `password`, `admin`) VALUES
 --
 
 --
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`attendance_ID`);
+
+--
 -- Indexes for table `batch`
 --
 ALTER TABLE `batch`
@@ -152,6 +228,12 @@ ALTER TABLE `batch1`
   ADD PRIMARY KEY (`batch_id`),
   ADD UNIQUE KEY `uq_batch1` (`batch_student_id`,`batch_teacher_id`,`batch_no`) USING BTREE,
   ADD KEY `FK_teacher` (`batch_teacher_id`);
+
+--
+-- Indexes for table `fees`
+--
+ALTER TABLE `fees`
+  ADD PRIMARY KEY (`fee_id`);
 
 --
 -- Indexes for table `student_details`
@@ -176,6 +258,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `attendance_ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `batch`
 --
 ALTER TABLE `batch`
@@ -185,13 +273,19 @@ ALTER TABLE `batch`
 -- AUTO_INCREMENT for table `batch1`
 --
 ALTER TABLE `batch1`
-  MODIFY `batch_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `batch_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `fees`
+--
+ALTER TABLE `fees`
+  MODIFY `fee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `student_details`
 --
 ALTER TABLE `student_details`
-  MODIFY `student_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `student_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `teacher_type_table`
